@@ -1,19 +1,13 @@
 var express = require('express');
-var handlebars = require('handlebars');
-var fs = require('fs');
-
-function loadHtml(page, data) {
-  fs.readFile(page+'.html', function(err, source) {
-    var template = Handlebars.compile(source);
-    var result = template(data);
-    return result;
-  });
-}
+exphbs  = require('express-handlebars');
 
 var app = express();
 
-app.get('/', function(req, res) {
-  res.end('/views/index.html');
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+app.get('/', function (req, res) {
+    res.render('index');
 });
 
 app.listen(8080);
