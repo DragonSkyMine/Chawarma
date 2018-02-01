@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/DragonSkyMine/Chawarma/issues"
   },
-  "homepage": "https://github.com/DragonSkyMine/Chawarma#readme"
+  "homepage": "https://github.com/DragonSkyMine/Chawarma#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
 }
