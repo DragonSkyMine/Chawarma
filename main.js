@@ -1,10 +1,12 @@
 var express = require('express');
+var handlebars = require('handlebars');
+
 
 var app = express();
 
+
 app.get('/', function(req, res) {
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Vous êtes à l\'accueil');
+    res.render('/layout/index.ejs');
 });
 
 app.listen(8080);
