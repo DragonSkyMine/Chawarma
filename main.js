@@ -13,7 +13,7 @@ function loadHtml(page, data) {
 var app = express();
 
 app.get('/', function(req, res) {
-  res.render('/layout/index.ejs');
+  res.end('/views/index.html');
 });
 
 app.listen(8080);
