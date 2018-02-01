@@ -1,0 +1,25 @@
+{
+  "name": "chawarma",
+  "version": "1.0.0",
+  "description": "Plateforme de questionnaire",
+  "main": "main.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DragonSkyMine/Chawarma.git"
+  },
+  "keywords": [
+    "plateforme",
+    "web",
+    "site",
+    "question"
+  ],
+  "author": "MIAW-JC-PC-JS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DragonSkyMine/Chawarma/issues"
+  },
+  "homepage": "https://github.com/DragonSkyMine/Chawarma#readme"
+}
