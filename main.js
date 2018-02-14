@@ -20,27 +20,27 @@ app.use(sess({
   resave: true,
   saveUninitialized: true
 }));
-app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 passport.use('local', new LocalStrategy({
   usernameField: 'etu_mail',
   passwordField: 'etu_mdp',
   passReqToCallback: true //passback entire req to call back
 } , function (req, username, password, done){
-  if(!username || !password ) { return done(null, false, req.flash('loginError','All fields are required.')); }
+  if(!username || !password ) { return done(null, false, {'message': 'All fields are required.'}); }
   var salt = '7fa73b47df808d36c5fe328546ddef8b9011b2c6';
   connection.query("select * from Etudiant where etu_mail = ?", [username], function(err, rows){
-    console.log(err); console.log(rows);
-    if (err) return done(req.flash('message',err));
-    if(!rows.length){ return done(null, false, req.flash('loginError','Invalid username or password.')); }
+    if (err) {
+      console.log(err);
+    }
+    if (err) return done({'message': err});
+    if(!rows.length){ return done(null, false,{'message': 'Invalid username or password.'}); }
     salt = salt+''+password;
     var encPassword = crypto.createHash('sha1').update(salt).digest('hex');
     var dbPassword  = rows[0].etu_mdp;
-    console.log(encPassword + ' ' + dbPassword);
     if(dbPassword != encPassword){
-
-      return done(null, false, req.flash('loginError','Invalid username or password.'));
+      return done(null, false, {'message':'Invalid username or password.'});
     }
     return done(null, rows[0]);
   });
@@ -62,15 +62,31 @@ app
 .get('/', function(req, res){
   res.redirect('/signin');
 })
+.get('/accueil', isAuthenticated, function(req, res){
+  res.render('accueil.ejs');
+})
 .get('/signin', function(req, res){
-  res.render('index.ejs',{'loginError' :req.flash('loginError')});
+  res.render('index.ejs',{'loginError' :req.flash('error')});
 })
 .post("/signin", passport.authenticate('local', {
-    successRedirect: '/profile',
+    successRedirect: '/accueil',
     failureRedirect: '/signin',
     failureFlash: true
 }), function(req, res, info){
-    res.render('index.ejs',{'loginError' :req.flash('loginError')});
+    res.render('index.ejs',{'loginError' :req.flash('error')});
+})
+.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
 });
 
 app.listen(8080);
+
+function isAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  req.flash('error','You must be logged in to access this page');
+  res.redirect('/signin');
+
+}

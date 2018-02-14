@@ -5,8 +5,6 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="User Authentication">
-  <meta name="author" content="">
-
   <title>User Authentication</title>
 </head>
 
@@ -15,8 +13,8 @@
   <form class="form-signin" method="post" action="/signin">
     <h3 class="form-signin-heading">Nodejs MySQL Login Script</h3>
     <% if ( loginError.length > 0 ) { %>
-  <p>Message: <%= loginError %> </p>
-<% } %>
+    <p>Message: <%= loginError %> </p>
+    <% } %>
     <input class="form-control" type="text" name="etu_mail" placeholder="Username" />
     <input class="form-control" type="password" name="etu_mdp" placeholder="Password" />
     <label class="checkbox"></label>
