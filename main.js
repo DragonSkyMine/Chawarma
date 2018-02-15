@@ -23,14 +23,14 @@ app.use(sess({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-passport.use('local', new LocalStrategy({
-  usernameField: 'etu_mail',
-  passwordField: 'etu_mdp',
+passport.use('local-etu', new LocalStrategy({
+  usernameField: 'per_mail',
+  passwordField: 'per_mdp',
   passReqToCallback: true //passback entire req to call back
 } , function (req, username, password, done){
   if(!username || !password ) { return done(null, false, {'message': 'All fields are required.'}); }
   var salt = '7fa73b47df808d36c5fe328546ddef8b9011b2c6';
-  connection.query("select * from Etudiant where etu_mail = ?", [username], function(err, rows){
+  connection.query("select * from v_etudiant where per_mail = ?", [username], function(err, rows){
     if (err) {
       console.log(err);
     }
@@ -47,16 +47,18 @@ passport.use('local', new LocalStrategy({
 }
 ));
 passport.serializeUser(function(user, done){
-    done(null, user.etu_id);
+    done(null, user.per_id);
 });
 passport.deserializeUser(function(id, done){
-    connection.query("select * from Etudiant where etu_id = "+ id, function (err, rows){
+    connection.query("select * from Personne where per_id = "+ id, function (err, rows){
         if (err) {
           console.log(err);
         }
         done(err, rows[0]);
     });
 });
+
+
 
 app
 .get('/', function(req, res){
@@ -68,7 +70,7 @@ app
 .get('/signin', function(req, res){
   res.render('index.ejs',{'loginError' :req.flash('error')});
 })
-.post("/signin", passport.authenticate('local', {
+.post("/signin", passport.authenticate('local-etu', {
     successRedirect: '/accueil',
     failureRedirect: '/signin',
     failureFlash: true
