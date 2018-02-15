@@ -32,7 +32,7 @@ passport.use('local-etu', new LocalStrategy({
     var encPassword = crypto.createHash('sha1').update(salt).digest('hex');
     var dbPassword  = rows[0].per_mdp;
     if(dbPassword != encPassword){
-      return done(null, false, {'message':'Invalid username or password.'});
+      return done(null, false, {'message':'Adresse email ou Mot de passe incorrect.'});
     }
     return done(null, rows[0]);
   });
