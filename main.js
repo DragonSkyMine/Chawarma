@@ -8,6 +8,7 @@ var connection = require('./lib/dbconn.js');
 var sess = require('express-session');
 var Store = require('express-session').Store;
 var BetterMemoryStore = require('session-memory-store')(sess);
+var engine = require('ejs-locals');
 var store = new BetterMemoryStore({ expires: 60 * 60 * 1000, debug: true });
 var app = express();
 
@@ -58,7 +59,10 @@ passport.deserializeUser(function(id, done){
     });
 });
 
-
+app.use(express.static(__dirname + '/public'));
+app.engine('ejs', engine);
+app.set('views', __dirname + '/templates');
+app.set('view engine', 'ejs');
 
 app
 .get('/', function(req, res){
@@ -81,6 +85,8 @@ app
   req.logout();
   res.redirect('/');
 });
+
+
 
 app.listen(8080);
 
