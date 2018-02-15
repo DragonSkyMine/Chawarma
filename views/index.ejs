@@ -1,3 +1,14 @@
+<!-- Chargement du layout -->
 <% layout('templates/layout/page') %>
 
-<h1>Test</h1>
+<!-- Formulaire de connexion -->
+<form class="form-signin" method="post" action="/signin">
+    <h3 class="form-signin-heading">Nodejs MySQL Login Script</h3>
+    <% if ( loginError.length > 0 ) { %>
+    <p>Message: <%= loginError %> </p>
+    <% } %>
+    <input class="form-control" type="text" name="etu_mail" placeholder="Username" />
+    <input class="form-control" type="password" name="etu_mdp" placeholder="Password" />
+    <label class="checkbox"></label>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+  </form>
