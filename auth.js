@@ -1,5 +1,7 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+var connection = require('./lib/dbconn.js');
+var crypto = require('crypto');
 
 passport.serializeUser(function(user, done){
   done(null, user.per_id);

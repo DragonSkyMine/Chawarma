@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
+-- version 4.7.3
+-- https://www.phpmyadmin.net/
 --
--- Client :  localhost
--- Généré le :  Jeu 15 Février 2018 à 02:49
--- Version du serveur :  5.7.21-0ubuntu0.16.04.1
--- Version de PHP :  7.0.22-0ubuntu0.16.04.1
+-- Hôte : localhost:3306
+-- Généré le :  jeu. 15 fév. 2018 à 15:18
+-- Version du serveur :  5.6.35
+-- Version de PHP :  7.1.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `chawarma`
 --
-CREATE DATABASE IF NOT EXISTS `chawarma` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
-USE `chawarma`;
 
 -- --------------------------------------------------------
 
@@ -57,7 +55,7 @@ CREATE TABLE `Etudiant` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `Etudiant`
+-- Déchargement des données de la table `Etudiant`
 --
 
 INSERT INTO `Etudiant` (`etu_id`, `per_id`) VALUES
@@ -89,7 +87,7 @@ CREATE TABLE `Personne` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Contenu de la table `Personne`
+-- Déchargement des données de la table `Personne`
 --
 
 INSERT INTO `Personne` (`per_id`, `per_nom`, `per_prenom`, `per_mail`, `per_mdp`) VALUES
@@ -144,8 +142,54 @@ CREATE TABLE `Sondage` (
   `cla_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Index pour les tables exportées
+-- Doublure de structure pour la vue `v_enseignant`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `v_enseignant` (
+`per_id` int(11)
+,`per_nom` varchar(20)
+,`per_prenom` varchar(20)
+,`per_mail` varchar(40)
+,`per_mdp` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `v_etudiant`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `v_etudiant` (
+`per_id` int(11)
+,`per_nom` varchar(20)
+,`per_prenom` varchar(20)
+,`per_mail` varchar(40)
+,`per_mdp` varchar(100)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `v_enseignant`
+--
+DROP TABLE IF EXISTS `v_enseignant`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_enseignant`  AS  select `personne`.`per_id` AS `per_id`,`personne`.`per_nom` AS `per_nom`,`personne`.`per_prenom` AS `per_prenom`,`personne`.`per_mail` AS `per_mail`,`personne`.`per_mdp` AS `per_mdp` from (`personne` join `enseignant`) where (`enseignant`.`per_id` = `personne`.`per_id`) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `v_etudiant`
+--
+DROP TABLE IF EXISTS `v_etudiant`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `v_etudiant`  AS  select `personne`.`per_id` AS `per_id`,`personne`.`per_nom` AS `per_nom`,`personne`.`per_prenom` AS `per_prenom`,`personne`.`per_mail` AS `per_mail`,`personne`.`per_mdp` AS `per_mdp` from (`personne` join `etudiant`) where (`personne`.`per_id` = `etudiant`.`per_id`) ;
+
+--
+-- Index pour les tables déchargées
 --
 
 --
@@ -222,7 +266,7 @@ ALTER TABLE `Sondage`
   ADD KEY `fk_cla_id` (`cla_id`);
 
 --
--- AUTO_INCREMENT pour les tables exportées
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
@@ -271,7 +315,7 @@ ALTER TABLE `ReponseEtu`
 ALTER TABLE `Sondage`
   MODIFY `son_id` int(11) NOT NULL AUTO_INCREMENT;
 --
--- Contraintes pour les tables exportées
+-- Contraintes pour les tables déchargées
 --
 
 --
