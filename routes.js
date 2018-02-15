@@ -16,11 +16,11 @@ router
   res.render('siginprof.ejs',{'loginError' :req.flash('error')});
 })
 .post("/signin", passport.authenticate('local-etu', {
-    successRedirect: '/accueil',
-    failureRedirect: '/signin',
-    failureFlash: true
+  successRedirect: '/accueil',
+  failureRedirect: '/signin',
+  failureFlash: true
 }), function(req, res, info){
-    res.render('sigin.ejs',{'loginError' :req.flash('error')});
+  res.render('sigin.ejs',{'loginError' :req.flash('error')});
 })
 .post("/signinprof", passport.authenticate('local-ens', {
   successRedirect: '/accueil',
