@@ -12,7 +12,7 @@ router
 .get('/signin', function(req, res){
   res.render('index.ejs',{'loginError' :req.flash('error')});
 })
-.post("/signin", passport.authenticate('local', {
+.post("/signin", passport.authenticate('local-etu', {
     successRedirect: '/accueil',
     failureRedirect: '/signin',
     failureFlash: true
