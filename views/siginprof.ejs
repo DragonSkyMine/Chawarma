@@ -1,0 +1,20 @@
+<!-- Chargement du layout -->
+<% layout('templates/layout/page') %>
+<% block('title', 'Chawarma - Connexion prof'); -%><br>
+
+<!-- Formulaire de connexion -->
+<div class="form-style-8">
+    <h2>Se connecter à votre compte prof</h2>
+    <!-- Input du formulaire -->
+    <form method="post" action="/signinprof">
+        <!-- Gestion message d'erreur -->
+        <% if ( loginError.length > 0 ) { %>
+            <!-- <p class="error">Message: <%= loginError %> </p> -->
+            <span class="notification open"> <%= loginError %> </span>
+        <% } %>
+        <input class="form-control" type="email" name="per_mail" placeholder="Adresse email" required/>
+        <input class="form-control" type="password" name="per_mdp" placeholder="Mot de passe" required/>
+        <input type="submit" value="Se connecter" />
+    </form>
+    <h3><a href="/siginprof">Vous êtes étudiant ?</a></h3>
+  </div>

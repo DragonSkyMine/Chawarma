@@ -71,7 +71,7 @@ body{
 /* Formulaire */
 .form-style-8{
   width: 30%;
-  padding: 30px;
+  padding: 30px 30px 0px;
   background: #FFFFFF;
   margin: 50px auto;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
@@ -88,6 +88,20 @@ body{
   font-weight: 100;
   padding: 20px;
   margin: -30px -30px 30px -30px;
+}
+
+.form-style-8 h3{
+  background: #333;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 100;
+  padding: 20px;
+  margin: 30px -30px 30px -30px;
+}
+
+.form-style-8 h3 a{
+  color: #b4b4b4;
 }
 
 /* Bouton valider */
