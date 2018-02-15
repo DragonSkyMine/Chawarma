@@ -36,5 +36,11 @@ app.set('view engine', 'ejs');
 
 app.use('/', routes);
 
+app.use(function(req, res, next) {
+    var err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
 
 app.listen(8080);

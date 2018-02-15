@@ -7,6 +7,7 @@ router
   res.redirect('/signin');
 })
 .get('/accueil', isAuthenticated, function(req, res){
+  console.log(req.user);
   res.render('accueil.ejs');
 })
 .get('/signin', function(req, res){
