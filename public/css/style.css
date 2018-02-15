@@ -34,6 +34,40 @@ body{
 /* ======= CSS : NavBar Fin =============== */
 
 /* ======= CSS : Form Debut =============== */
+/* Error */
+.notification{
+	font-size:14px;
+	width:10%;
+	padding:5px 0;
+	position:absolute;
+  top:0;
+  left:50%;
+  margin-left:-90px;
+  box-sizing:border-box;
+  border-radius:5px;
+  background-color: rgb(204, 45, 45);
+  color:#ffffff;
+  text-align: center;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+}
+
+.open{
+	-webkit-animation:moveOpen 5s;
+  -webkit-animation-iteration-count: 1;
+  -webkit-animation-fill-mode: forwards;
+}
+/* Safari and Chrome */
+@-webkit-keyframes moveOpen 
+	{
+  from {-webkit-transform: translate(0,-100px);}
+  10% {-webkit-transform: translate(0,20px);}
+  12% {-webkit-transform: translate(0,22px);}
+  16% {-webkit-transform: translate(0,20px);}
+  80% {-webkit-transform: translate(0,20px);}
+  85% {-webkit-transform: translate(0,25px);}
+  to {-webkit-transform: translate(0,-100px);}
+}
+
 /* Formulaire */
 .form-style-8{
   width: 30%;
