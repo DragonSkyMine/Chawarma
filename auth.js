@@ -30,7 +30,7 @@ passport.use('local-etu', new LocalStrategy({
     if(!rows.length){ return done(null, false,{'message': 'Invalid username or password.'}); }
     salt = salt+''+password;
     var encPassword = crypto.createHash('sha1').update(salt).digest('hex');
-    var dbPassword  = rows[0].etu_mdp;
+    var dbPassword  = rows[0].per_mdp;
     if(dbPassword != encPassword){
       return done(null, false, {'message':'Invalid username or password.'});
     }
