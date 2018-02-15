@@ -20,14 +20,14 @@ passport.use('local-etu', new LocalStrategy({
   passwordField: 'per_mdp',
   passReqToCallback: true //passback entire req to call back
 } , function (req, username, password, done){
-  if(!username || !password ) { return done(null, false, {'message': 'All fields are required.'}); }
+  if(!username || !password ) { return done(null, false, {'message': 'Veuillez remplir tout les champs.'}); }
   var salt = '7fa73b47df808d36c5fe328546ddef8b9011b2c6';
   connection.query("select * from v_etudiant where per_mail = ?", [username], function(err, rows){
     if (err) {
       console.log(err);
     }
     if (err) return done({'message': err});
-    if(!rows.length){ return done(null, false,{'message': 'Invalid username or password.'}); }
+    if(!rows.length){ return done(null, false,{'message': 'Adresse email ou Mot de passe incorrect.'}); }
     salt = salt+''+password;
     var encPassword = crypto.createHash('sha1').update(salt).digest('hex');
     var dbPassword  = rows[0].per_mdp;

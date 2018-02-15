@@ -10,14 +10,24 @@ router
   res.render('accueil.ejs');
 })
 .get('/signin', function(req, res){
-  res.render('index.ejs',{'loginError' :req.flash('error')});
+  res.render('sigin.ejs',{'loginError' :req.flash('error')});
+})
+.get('/signinprof', function(req, res){
+  res.render('siginprof.ejs',{'loginError' :req.flash('error')});
 })
 .post("/signin", passport.authenticate('local-etu', {
     successRedirect: '/accueil',
     failureRedirect: '/signin',
     failureFlash: true
 }), function(req, res, info){
-    res.render('index.ejs',{'loginError' :req.flash('error')});
+    res.render('sigin.ejs',{'loginError' :req.flash('error')});
+})
+.post("/signinprof", passport.authenticate('local-ens', {
+  successRedirect: '/accueil',
+  failureRedirect: '/signinprof',
+  failureFlash: true
+}), function(req, res, info){
+  res.render('siginprof.ejs',{'loginError' :req.flash('error')});
 })
 .get('/logout', function(req, res){
   req.logout();
