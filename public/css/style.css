@@ -31,16 +31,92 @@ body{
 .topnav .icon {
   display: none;
 }
-  
+/* ======= CSS : NavBar Fin =============== */
+
+/* ======= CSS : Form Debut =============== */
+/* Formulaire */
+.form-style-8{
+  width: 30%;
+  padding: 30px;
+  background: #FFFFFF;
+  margin: 50px auto;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+  -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+  -webkit-box-shadow:  0px 0px 15px rgba(0, 0, 0, 0.22);
+}
+
+/* Titre h2 */
+.form-style-8 h2{
+  background: #333;
+  text-transform: uppercase;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 100;
+  padding: 20px;
+  margin: -30px -30px 30px -30px;
+}
+
+/* Bouton valider */
+.form-style-8 input[type="button"], 
+.form-style-8 input[type="submit"]{
+    -moz-box-shadow: inset 0px 1px 0px 0px rgb(214, 69, 69);
+    -webkit-box-shadow: inset 0px 1px 0px 0px rgb(214, 69, 69);
+    box-shadow: inset 0px 1px 0px 0px rgb(214, 69, 69);
+    background-color: rgb(214, 69, 69);
+    border: 1px solid rgb(161, 54, 54);
+    display: inline-block;
+    cursor: pointer;
+    color: #FFFFFF;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 14px;
+    padding: 8px 18px;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+/* Bouton valider */
+.form-style-8 input[type="button"]:hover, 
+.form-style-8 input[type="submit"]:hover {
+    background:linear-gradient(to bottom, rgb(216, 27, 27) 5%, rgb(224, 30, 62) 100%);
+    background-color:rgb(218, 29, 29);
+}
+
+.form-style-8 input[type="text"],
+.form-style-8 input[type="date"],
+.form-style-8 input[type="datetime"],
+.form-style-8 input[type="email"],
+.form-style-8 input[type="number"],
+.form-style-8 input[type="search"],
+.form-style-8 input[type="time"],
+.form-style-8 input[type="url"],
+.form-style-8 input[type="password"],
+.form-style-8 textarea,
+.form-style-8 select 
+{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    outline: none;
+    display: block;
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font: 16px Arial, Helvetica, sans-serif;
+    height: 45px;
+}
+/* ======= CSS : Form Fin ================= */
+
+
+/* ======= CSS : Responsive =============== */
 @media screen and (max-width: 600px) {
   .topnav a:not(:first-child) {display: none;}
   .topnav a.icon {
     float: right;
     display: block;
   }
-}
-  
-@media screen and (max-width: 600px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
@@ -52,5 +128,8 @@ body{
     display: block;
     text-align: left;
   }
+  .form-style-8{
+    width: 80%;
+  }
 }
-/* ======= CSS : NavBar Fin =============== */
+/* ======= CSS : Responsive =============== */
