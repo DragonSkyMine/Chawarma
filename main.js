@@ -12,7 +12,7 @@ var engine = require('ejs-locals');
 var store = new BetterMemoryStore({ expires: 60 * 60 * 1000, debug: true });
 var app = express();
 
-var routes = require('./routes.js');
+var routes = require('./lib/routes.js');
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
