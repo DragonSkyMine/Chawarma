@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le :  jeu. 15 fév. 2018 à 15:18
+-- Généré le :  ven. 16 fév. 2018 à 08:23
 -- Version du serveur :  5.6.35
 -- Version de PHP :  7.1.8
 
@@ -42,6 +42,13 @@ CREATE TABLE `Enseignant` (
   `ens_id` int(11) NOT NULL,
   `per_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `Enseignant`
+--
+
+INSERT INTO `Enseignant` (`ens_id`, `per_id`) VALUES
+(1, 2);
 
 -- --------------------------------------------------------
 
@@ -91,7 +98,8 @@ CREATE TABLE `Personne` (
 --
 
 INSERT INTO `Personne` (`per_id`, `per_nom`, `per_prenom`, `per_mail`, `per_mdp`) VALUES
-(1, 'Sagnes', 'Joey', 'joey.sagnes@truc.com', '6607a999607711cd339dce1de6d64425a0985cfd');
+(1, 'Sagnes', 'Joey', 'joey.sagnes@truc.com', '6607a999607711cd339dce1de6d64425a0985cfd'),
+(2, 'prof', 'prenom', 'prof@prof.fr', '6607a999607711cd339dce1de6d64425a0985cfd');
 
 -- --------------------------------------------------------
 
@@ -278,7 +286,7 @@ ALTER TABLE `Classe`
 -- AUTO_INCREMENT pour la table `Enseignant`
 --
 ALTER TABLE `Enseignant`
-  MODIFY `ens_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ens_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT pour la table `Etudiant`
 --
@@ -293,7 +301,7 @@ ALTER TABLE `Niveau`
 -- AUTO_INCREMENT pour la table `Personne`
 --
 ALTER TABLE `Personne`
-  MODIFY `per_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `per_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `Question`
 --
