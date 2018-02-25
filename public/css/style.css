@@ -97,3 +97,19 @@ p {
   font-size: 17px;
 }
 /* ======= CSS : Footer =============== */
+table{
+  width: 100%;
+  border-collapse: collapse;
+
+}
+
+table #thead{
+  border-spacing: 0;
+  border: 1px solid #ddd;
+  background-color: rgba(0, 0, 0, 0.22)
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
