@@ -113,3 +113,20 @@ th, td {
   text-align: left;
   padding: 8px;
 }
+
+a {
+  float: left;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.ouvert{
+  color: #009100;
+
+}
+
+.ferme{
+  color: #ff0000;
+}
