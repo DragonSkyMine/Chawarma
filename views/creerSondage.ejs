@@ -1,0 +1,51 @@
+<!-- Chargement du layout -->
+<% layout('templates/layout/page') %>
+<% block('title', 'Chawarma - Accueil'); -%>
+
+<div class="form-style-8">
+  <h2>Créer un sondage</h2>
+  <form id="form-sondage" method="post" action="/creerSondage" style="">
+    <input class="form-control" type="text" name="son_refe" placeholder="Libellé">
+    <select class="form-control" name="cla_id" form="form-sondage" title="Classe">
+      <% for (var i = 0; i < classes.length; i++) { %>
+        <option value="<%= classes[i].cla_id %>"><%= classes[i].cla_nom %></option>
+        <% } %>
+      </select>
+      <input type="submit" value="Valider" />
+      <br>
+      <span class="button" onclick="addQuestion();">+</span>
+      <div id="questions">
+      </div>
+    </form>
+    <h3>#JESAISPAS</h3>
+  </div>
+</div>
+<script>
+function addQuestion() {
+  var questionNode = $('<div style="display: none;" class="form-question form-style-8"><h2>Question<span class="close" onclick="deleteQuestion(this);">&times;</span></h2><input type="text" name="que_question" placeholder="Question"/><span class="button" onclick="addReponse(this);">+</span><div class="reponses"></div><h3>#JESAISPAS</h3></div>');
+  $('#questions').append(questionNode);
+  $(questionNode).show(400);
+}
+
+function deleteQuestion(element) {
+  var question = $(element).closest('div[class^="form-question"]');
+  $(question).hide(400, function() {
+    $(this).remove();
+  });
+}
+
+function addReponse(element) {
+  var questionNode = $(element).closest('div[class^="form-question"]');
+  var reponses = $(questionNode).find('.reponses').first();
+  var reponseNode = $('<div class="form-reponse form-style-8" style="display: none;"><h2>Reponse<span class="close" onclick="deleteReponse(this);">&times;</span></h2>REPONSE<h3>#JESAISPAS</h3></div>');
+  $(reponses).append(reponseNode);
+  $(reponseNode).show(400);
+}
+
+function deleteReponse(element) {
+  var reponse = $(element).closest('div[class^="form-reponse"]');
+  $(reponse).hide(400, function() {
+    $(this).remove();
+  });
+}
+</script>

@@ -11,15 +11,17 @@
         <title><%=blocks.title %></title>
 
         <!-- CSS -->
-        <link rel="stylesheet" type="text/css" href="/css/style.css">
         <link rel="stylesheet" type="text/css" href="/css/auth.css">
+        <link rel="stylesheet" type="text/css" href="/css/style.css">
 
         <!-- JS -->
+        <script src="/js/jquery-3.2.1.min.js"></script>
         <script src="/js/header.js"></script>
     </head>
 
     <body>
         <div id="corps">
+            <%-partial('../partials/error')%>
             <%-body -%>
         </div>
     </body>

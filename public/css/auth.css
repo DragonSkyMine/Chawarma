@@ -22,7 +22,7 @@
   -webkit-animation-fill-mode: forwards;
 }
 /* Safari and Chrome */
-@-webkit-keyframes moveOpen 
+@-webkit-keyframes moveOpen
 	{
   from {-webkit-transform: translate(0,-100px);}
   10% {-webkit-transform: translate(0,20px);}
@@ -36,8 +36,9 @@
 /* Formulaire */
 .form-style-8{
   width: 30%;
-  padding: 30px 30px 0px;
+  padding: 30px 30px 0;
   background: #FFFFFF;
+	position: relative;
   margin: 50px auto;
   box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
   -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
@@ -70,13 +71,15 @@
 }
 
 /* Bouton valider */
-.form-style-8 input[type="button"], 
-.form-style-8 input[type="submit"]{
+.form-style-8 input[type="button"],
+.form-style-8 input[type="submit"],
+.button {
     -moz-box-shadow: inset 0px 1px 0px 0px rgb(214, 69, 69);
     -webkit-box-shadow: inset 0px 1px 0px 0px rgb(214, 69, 69);
     box-shadow: inset 0px 1px 0px 0px rgb(214, 69, 69);
     background-color: rgb(214, 69, 69);
     border: 1px solid rgb(161, 54, 54);
+		margin: 5px 0;
     display: inline-block;
     cursor: pointer;
     color: #FFFFFF;
@@ -88,7 +91,7 @@
 }
 
 /* Bouton valider */
-.form-style-8 input[type="button"]:hover, 
+.form-style-8 input[type="button"]:hover,
 .form-style-8 input[type="submit"]:hover {
     background:linear-gradient(to bottom, rgb(216, 27, 27) 5%, rgb(224, 30, 62) 100%);
     background-color:rgb(218, 29, 29);
@@ -104,7 +107,7 @@
 .form-style-8 input[type="url"],
 .form-style-8 input[type="password"],
 .form-style-8 textarea,
-.form-style-8 select 
+.form-style-8 select
 {
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
