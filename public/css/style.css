@@ -119,6 +119,23 @@ th, td {
   padding: 8px;
 }
 
+a {
+  float: left;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.ouvert{
+  color: #009100;
+
+}
+
+.ferme{
+  color: #ff0000;
+}
+
 .toolbar {
   float: right;-moz-box-shadow: inset 0px 1px 0px 0px rgb(214, 69, 69);
   -webkit-box-shadow: inset 0px 1px 0px 0px rgb(214, 69, 69);

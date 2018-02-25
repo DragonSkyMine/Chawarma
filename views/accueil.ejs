@@ -15,15 +15,18 @@
                 <th>Libelle</th>
                 <th>Etat</th>
             </tr>
-          </thead>
-          <tbody>
+            <% for(var i=0; i < Object.keys(sondages.sondages).length; i++) {%>
             <tr>
-                <% for(var i=0; i < Object.keys(sondages.sondages).length; i++) {%>
-                    <td><%= sondages.sondages[i].son_id %></td>
-                    <td><%= sondages.sondages[i].son_refe %></td>
+                <td><%= sondages.sondages[i].son_id %></td>
+                <td><%= sondages.sondages[i].son_refe %></td>
+                <% if (sondages.sondages[i].cla_flag == 'O'){ %>
+                    <td><a class="ouvert" href="/quiz/<%=i%>">Ouvert</a></td>
+                <% } %>
+                <% if (sondages.sondages[i].cla_flag == 'F'){ %>
+                    <td><a class="ferme" href="/quiz/<%=i%>">Fermé</a></td>
                 <% } %>
             </tr>
-</tbody>
+            <% } %>
         </table>
     </div>
 
