@@ -7,15 +7,21 @@
     <h2>Bienvenue <%= user.per_prenom %></h2>
     <hr>
     <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
+    <div style="overflow-x:auto;">
+        <table>
+            <tr id="thead">
+                <th>N°</th>
+                <th>Libelle</th>
+                <th>Etat</th>
+            </tr>
+            <tr>
+                <% for(var i=0; i < Object.keys(sondages.sondages).length; i++) {%>
+                    <td><%= sondages.sondages[i].son_id %></td>
+                    <td><%= sondages.sondages[i].son_refe %></td>
+                <% } %>
+            </tr>
+            
+        </table>
+    </div>
 
 </div>
