@@ -15,6 +15,7 @@ var app = express();
 var routes = require('./lib/routes.js');
 
 app.use(express.static("public"));
+app.use( bodyParser.json() ); 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(sess({
   name: 'JSESSION',

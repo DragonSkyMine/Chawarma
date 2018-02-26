@@ -82,10 +82,12 @@ function formSubmit() {
       question.reponses.push(reponse);
     });
   });
-  var data = {
+  var sondageData = {
     'sondage': sondage
   }
-  console.log(data);
+  $.post( "/creerSondage", sondageData, function( data ) {
+    console.log( data );
+  });
   return false;
 }
 </script>
