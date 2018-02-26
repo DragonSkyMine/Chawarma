@@ -6,12 +6,12 @@
   <h1>Quizz</h1>
   <h2>Bienvenue sur le quizz <%= sondage.id %></h2>
   <hr>
-  <form id="form-sondage" method="post" onsubmit="return formSubmit();">
+  <form id="form-sondage" method="post" action="/quiz/<%= sondage.id %>">
     <% for(var i=0; i < Object.keys(sondage.questions).length; i++) {%>
       <h3><%= sondage.questions[i].que_question %></h3>
       <% for(var y=0; y < Object.keys(sondage.questions[i].reponses).length; y++) {%>
       <label for="<%= sondage.questions[i].reponses[y].rep_label %>"><%= sondage.questions[i].reponses[y].rep_label %></label>
-      <input type="checkbox" name="<%= sondage.questions[i].reponses[y].rep_label %>" id="<%= sondage.questions[i].reponses[y].rep_label %>" value="<%= sondage.questions[i].que_id %>_<%= sondage.questions[i].reponses[y].rep_id %>_<%= sondage.questions[i].reponses[y].rep_vrai %>"><br><br>
+      <input type="checkbox" name="<%= sondage.questions[i].que_id %>_<%= sondage.questions[i].reponses[y].rep_id %>_<%= sondage.questions[i].reponses[y].rep_vrai %>" id="<%= sondage.questions[i].reponses[y].rep_label %>" value="<%= sondage.questions[i].que_id %>_<%= sondage.questions[i].reponses[y].rep_id %>_<%= sondage.questions[i].reponses[y].rep_vrai %>"><br><br>
       <% } %>
     <% } %>
     <input type="submit" value="Soumettre" /><br /><br />
