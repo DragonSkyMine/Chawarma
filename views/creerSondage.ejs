@@ -4,26 +4,27 @@
 
 <div class="form-style-8">
   <h2>Créer un sondage</h2>
-  <form id="form-sondage" method="post" action="/creerSondage" style="">
-    <input class="form-control" type="text" name="son_refe" placeholder="Libellé">
-    <select class="form-control" name="cla_id" form="form-sondage" title="Classe">
+  <form id="form-sondage" method="post" onsubmit="return formSubmit();">
+    <input class="form-control" type="text" id="son_refe" name="son_refe" placeholder="Libellé" required>
+    <select class="form-control" id="cla_id" name="cla_id" form="form-sondage" title="Classe" required>
       <% for (var i = 0; i < classes.length; i++) { %>
         <option value="<%= classes[i].cla_id %>"><%= classes[i].cla_nom %></option>
         <% } %>
       </select>
-      <input type="submit" value="Valider" />
       <br>
-      <span class="button" onclick="addQuestion();">+</span>
+      <span class="button" onclick="addQuestion();" title="Ajouter une question">+</span>
       <div id="questions">
       </div>
+      <input type="submit" value="Valider" onclick="javascript:void(0);" />
     </form>
-    <h3>#JESAISPAS</h3>
+    <h3></h3>
   </div>
 </div>
 <script>
 function addQuestion() {
-  var questionNode = $('<div style="display: none;" class="form-question form-style-8"><h2>Question<span class="close" onclick="deleteQuestion(this);">&times;</span></h2><input type="text" name="que_question" placeholder="Question"/><span class="button" onclick="addReponse(this);">+</span><div class="reponses"></div><h3>#JESAISPAS</h3></div>');
+  var questionNode = $('<div style="display: none;" class="form-question form-style-8"><h2>Question<span class="close" onclick="deleteQuestion(this);">&times;</span></h2><input type="text" name="que_question" placeholder="Question"/><span class="button" onclick="addReponse(this);" title="Ajouter une réponse">+</span><div class="reponses"></div><h3 class="form-question-footer"></h3></div>');
   $('#questions').append(questionNode);
+  updateNumber();
   $(questionNode).show(400);
 }
 
@@ -31,14 +32,16 @@ function deleteQuestion(element) {
   var question = $(element).closest('div[class^="form-question"]');
   $(question).hide(400, function() {
     $(this).remove();
+    updateNumber();
   });
 }
 
 function addReponse(element) {
   var questionNode = $(element).closest('div[class^="form-question"]');
   var reponses = $(questionNode).find('.reponses').first();
-  var reponseNode = $('<div class="form-reponse form-style-8" style="display: none;"><h2>Reponse<span class="close" onclick="deleteReponse(this);">&times;</span></h2>REPONSE<h3>#JESAISPAS</h3></div>');
+  var reponseNode = $('<div class="form-reponse form-style-8" style="display: none;"><h2>Reponse<span class="close" onclick="deleteReponse(this);">&times;</span></h2><input type="text" name="rep_label" class="form-control" placeholder="Réponse"/><input type="checkbox" name="rep_vrai" value="1"/><label>&nbsp;Bonne réponse</label><h3 class="form-reponse-footer"></h3></div>');
   $(reponses).append(reponseNode);
+  updateNumber();
   $(reponseNode).show(400);
 }
 
@@ -46,6 +49,43 @@ function deleteReponse(element) {
   var reponse = $(element).closest('div[class^="form-reponse"]');
   $(reponse).hide(400, function() {
     $(this).remove();
+    updateNumber();
   });
+}
+
+function updateNumber() {
+  $('.form-question').each(function() {
+    $(this).find('.form-question-footer').first().html('Question n°' + ($(this).index() + 1));
+    $(this).find('.form-reponse').each(function() {
+      $(this).find('.form-reponse-footer').first().html('Réponse n°' + ($(this).index() + 1));
+    });
+  });
+}
+
+function formSubmit() {
+  var sondage = {
+    'son_refe': $("#son_refe").val(),
+    'cla_id': $("#cla_id option:selected").first().val(),
+    'questions': new Array()
+  }
+  $('.form-question').each(function() {
+    var question = {
+      'que_question': $(this).find('input[name=que_question]').first().val(),
+      'reponses': new Array()
+    }
+    sondage.questions.push(question);
+    $(this).find('.form-reponse').each(function() {
+      var reponse = {
+        'rep_label': $(this).find('input[name=rep_label]').first().val(),
+        'rep_vrai': ($(this).find('input[name=rep_vrai]').first().prop("checked") == true ? 1 : 0)
+      }
+      question.reponses.push(reponse);
+    });
+  });
+  var data = {
+    'sondage': sondage
+  }
+  console.log(data);
+  return false;
 }
 </script>
