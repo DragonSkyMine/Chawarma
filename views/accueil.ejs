@@ -7,6 +7,10 @@
     <h2>Bienvenue <%= user.per_prenom %><% if (user.isProf) { %> <a class="toolbar" href="/creerSondage">+</a> <% } %></h2>
     <hr>
     <br>
+    <% if ( error !== undefined && error.length > 0 ) { %>
+          <!-- <p class="error">Message: <%= error %> </p> -->
+          <span class="notification open"> <%= error %> </span>
+      <% } %>
     <div style="overflow-x:auto;">
         <table class="table">
             <thead>

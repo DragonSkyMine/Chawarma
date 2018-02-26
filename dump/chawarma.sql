@@ -341,7 +341,6 @@ ALTER TABLE `ReponseEtu`
 --
 ALTER TABLE `Sondage`
   ADD PRIMARY KEY (`son_id`),
-  ADD UNIQUE KEY `son_refe` (`son_refe`),
   ADD KEY `son_id` (`son_id`,`ens_id`,`cla_id`),
   ADD KEY `fk_ens_id` (`ens_id`),
   ADD KEY `fk_cla_id` (`cla_id`);

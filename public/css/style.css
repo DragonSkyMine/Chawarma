@@ -273,3 +273,8 @@ table a {
     height: 45px;
 }
 /* ======= CSS : Form Fin ================= */
+
+.error {
+  color: red;
+  font-weight: bold;
+}
