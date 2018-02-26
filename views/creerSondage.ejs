@@ -5,6 +5,7 @@
 <div class="form-style-7">
   <h2>Créer un sondage</h2>
   <form id="form-sondage" method="post" onsubmit="return formSubmit();">
+    <p id="error" class="error"></p>
     <input class="form-control" type="text" id="son_refe" name="son_refe" placeholder="Libellé" required>
     <select class="form-control" id="cla_id" name="cla_id" form="form-sondage" title="Classe" required>
       <% for (var i = 0; i < classes.length; i++) { %>
@@ -22,7 +23,7 @@
 </div>
 <script>
 function addQuestion() {
-  var questionNode = $('<div style="display: none;" class="form-question form-style-8"><h2>Question<span class="close" onclick="deleteQuestion(this);">&times;</span></h2><input type="text" name="que_question" placeholder="Question"/><span class="button" onclick="addReponse(this);" title="Ajouter une réponse">+</span><div class="reponses"></div><h3 class="form-question-footer"></h3></div>');
+  var questionNode = $('<div style="display: none;" class="form-question form-style-8"><h2>Question<span class="close" onclick="deleteQuestion(this);">&times;</span></h2><input type="text" name="que_question" placeholder="Question" required/><span class="button" onclick="addReponse(this);" title="Ajouter une réponse">+</span><div class="reponses"></div><h3 class="form-question-footer"></h3></div>');
   $('#questions').append(questionNode);
   updateNumber();
   $(questionNode).show(400);
@@ -39,7 +40,7 @@ function deleteQuestion(element) {
 function addReponse(element) {
   var questionNode = $(element).closest('div[class^="form-question"]');
   var reponses = $(questionNode).find('.reponses').first();
-  var reponseNode = $('<div class="form-reponse form-style-8" style="display: none;"><h2>Reponse<span class="close" onclick="deleteReponse(this);">&times;</span></h2><input type="text" name="rep_label" class="form-control" placeholder="Réponse"/><input type="checkbox" name="rep_vrai" value="1"/><label>&nbsp;Bonne réponse</label><h3 class="form-reponse-footer"></h3></div>');
+  var reponseNode = $('<div class="form-reponse form-style-8" style="display: none;"><h2>Reponse<span class="close" onclick="deleteReponse(this);">&times;</span></h2><input type="text" name="rep_label" class="form-control" placeholder="Réponse" required/><input type="checkbox" name="rep_vrai" value="1"/><label>&nbsp;Bonne réponse</label><h3 class="form-reponse-footer"></h3></div>');
   $(reponses).append(reponseNode);
   updateNumber();
   $(reponseNode).show(400);
@@ -63,12 +64,18 @@ function updateNumber() {
 }
 
 function formSubmit() {
+  $('#error').html("").css('display', 'none');
   var sondage = {
     'son_refe': $("#son_refe").val(),
     'cla_id': $("#cla_id option:selected").first().val(),
     'questions': []
   }
-  $('.form-question').each(function() {
+  var formQuestions = $('.form-question');
+  if (formQuestions.length == 0) {
+    $('#error').html("Vous devez au moins ajouter une question").css('display', 'block');
+    return false;
+  }
+  $(formQuestions).each(function() {
     var question = {
       'que_question': $(this).find('input[name=que_question]').first().val(),
       'reponses': []
@@ -85,9 +92,12 @@ function formSubmit() {
   var sondageData = {
     'sondage': sondage
   }
-  console.log(sondage);
   $.post( "/creerSondage", {'sondageData': JSON.stringify(sondageData)}, function( data ) {
-    console.log( data );
+    if (data) {
+      return window.location.href = "/accueil";
+    } else {
+      $('#error').html("Erreur lors de la création du sondage").css('display', 'block');
+    }
   });
   return false;
 }

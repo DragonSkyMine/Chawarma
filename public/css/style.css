@@ -138,6 +138,10 @@ table a {
   color: #ff0000;
 }
 
+.nouveau{
+  color: #ff9100;
+}
+
 .toolbar {
   float: right;-moz-box-shadow: inset 0px 1px 0px 0px rgb(214, 69, 69);
   -webkit-box-shadow: inset 0px 1px 0px 0px rgb(214, 69, 69);
@@ -273,3 +277,8 @@ table a {
     height: 45px;
 }
 /* ======= CSS : Form Fin ================= */
+
+.error {
+  color: red;
+  font-weight: bold;
+}
