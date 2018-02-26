@@ -1,7 +1,6 @@
 var express = require('express');
 var flash = require('connect-flash');
 //var crypto = require('crypto');
-var bodyParser = require("body-parser");
 var passport = require('passport');
 //var LocalStrategy = require('passport-local').Strategy;
 //var connection = require('./lib/dbconn.js');
@@ -10,13 +9,14 @@ var Store = require('express-session').Store;
 var BetterMemoryStore = require('session-memory-store')(sess);
 var engine = require('ejs-locals');
 var store = new BetterMemoryStore({ expires: 60 * 60 * 1000, debug: true });
-var app = express();
-
+var bodyParser = require('body-parser');
+var app=express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 var routes = require('./lib/routes.js');
 
 app.use(express.static("public"));
-app.use( bodyParser.json() ); 
-app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(sess({
   name: 'JSESSION',
   secret: 'MYSECRETISVERYSECRET',
@@ -34,7 +34,6 @@ app.use(express.static(__dirname + '/public'));
 app.engine('ejs', engine);
 app.set('views', __dirname + '/views/');
 app.set('view engine', 'ejs');
-
 app.use('/', routes);
 
 app.listen(8080);

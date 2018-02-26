@@ -66,12 +66,12 @@ function formSubmit() {
   var sondage = {
     'son_refe': $("#son_refe").val(),
     'cla_id': $("#cla_id option:selected").first().val(),
-    'questions': new Array()
+    'questions': []
   }
   $('.form-question').each(function() {
     var question = {
       'que_question': $(this).find('input[name=que_question]').first().val(),
-      'reponses': new Array()
+      'reponses': []
     }
     sondage.questions.push(question);
     $(this).find('.form-reponse').each(function() {
@@ -85,7 +85,8 @@ function formSubmit() {
   var sondageData = {
     'sondage': sondage
   }
-  $.post( "/creerSondage", sondageData, function( data ) {
+  console.log(sondage);
+  $.post( "/creerSondage", {'sondageData': JSON.stringify(sondageData)}, function( data ) {
     console.log( data );
   });
   return false;
