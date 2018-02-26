@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Dim 25 Février 2018 à 15:17
+-- Généré le :  Lun 26 Février 2018 à 22:52
 -- Version du serveur :  5.7.21-0ubuntu0.17.10.1
 -- Version de PHP :  7.1.11-1+ubuntu17.04.1+deb.sury.org+1
 
@@ -32,14 +32,12 @@ DROP TABLE IF EXISTS `Niveau`;
 DROP TABLE IF EXISTS `Etudiant`;
 DROP TABLE IF EXISTS `Enseignant`;
 DROP TABLE IF EXISTS `Personne`;
-
 -- --------------------------------------------------------
 
 --
 -- Structure de la table `Classe`
 --
 
-DROP TABLE IF EXISTS `Classe`;
 CREATE TABLE `Classe` (
   `cla_id` int(11) NOT NULL,
   `niv_id` int(11) NOT NULL,
@@ -51,7 +49,9 @@ CREATE TABLE `Classe` (
 --
 
 INSERT INTO `Classe` (`cla_id`, `niv_id`, `cla_nom`) VALUES
-(1, 1, 'MIAW');
+(1, 1, 'MIAW'),
+(2, 1, 'SIMO'),
+(3, 2, 'S4D');
 
 -- --------------------------------------------------------
 
@@ -59,7 +59,6 @@ INSERT INTO `Classe` (`cla_id`, `niv_id`, `cla_nom`) VALUES
 -- Structure de la table `Enseignant`
 --
 
-DROP TABLE IF EXISTS `Enseignant`;
 CREATE TABLE `Enseignant` (
   `ens_id` int(11) NOT NULL,
   `per_id` int(11) NOT NULL
@@ -70,7 +69,8 @@ CREATE TABLE `Enseignant` (
 --
 
 INSERT INTO `Enseignant` (`ens_id`, `per_id`) VALUES
-(1, 2);
+(2, 2),
+(3, 3);
 
 -- --------------------------------------------------------
 
@@ -78,7 +78,6 @@ INSERT INTO `Enseignant` (`ens_id`, `per_id`) VALUES
 -- Structure de la table `Etudiant`
 --
 
-DROP TABLE IF EXISTS `Etudiant`;
 CREATE TABLE `Etudiant` (
   `etu_id` int(11) NOT NULL,
   `per_id` int(11) NOT NULL,
@@ -90,7 +89,9 @@ CREATE TABLE `Etudiant` (
 --
 
 INSERT INTO `Etudiant` (`etu_id`, `per_id`, `cla_id`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(2, 4, 1),
+(3, 5, 2);
 
 -- --------------------------------------------------------
 
@@ -98,7 +99,6 @@ INSERT INTO `Etudiant` (`etu_id`, `per_id`, `cla_id`) VALUES
 -- Structure de la table `Niveau`
 --
 
-DROP TABLE IF EXISTS `Niveau`;
 CREATE TABLE `Niveau` (
   `niv_id` int(11) NOT NULL,
   `niv_libelle` varchar(10) NOT NULL
@@ -109,7 +109,8 @@ CREATE TABLE `Niveau` (
 --
 
 INSERT INTO `Niveau` (`niv_id`, `niv_libelle`) VALUES
-(1, 'LP');
+(1, 'LP'),
+(2, 'DUT2');
 
 -- --------------------------------------------------------
 
@@ -117,7 +118,6 @@ INSERT INTO `Niveau` (`niv_id`, `niv_libelle`) VALUES
 -- Structure de la table `Personne`
 --
 
-DROP TABLE IF EXISTS `Personne`;
 CREATE TABLE `Personne` (
   `per_id` int(11) NOT NULL,
   `per_nom` varchar(20) NOT NULL,
@@ -132,7 +132,10 @@ CREATE TABLE `Personne` (
 
 INSERT INTO `Personne` (`per_id`, `per_nom`, `per_prenom`, `per_mail`, `per_mdp`) VALUES
 (1, 'Sagnes', 'Joey', 'joey.sagnes@truc.com', '6607a999607711cd339dce1de6d64425a0985cfd'),
-(2, 'prof', 'prenom', 'prof@prof.fr', '6607a999607711cd339dce1de6d64425a0985cfd');
+(2, 'Cubaud', 'Nicolas', 'n.cubaud@mail.com', '6607a999607711cd339dce1de6d64425a0985cfd'),
+(3, 'Blanchon', 'Herve', 'h.blanchon@mail.com', '6607a999607711cd339dce1de6d64425a0985cfd'),
+(4, 'Jeanne', 'Dupont', 'j.dupont@mail.com', '6607a999607711cd339dce1de6d64425a0985cfd'),
+(5, 'Machin', 'Raoul', 'm.raoul@mail.com', '6607a999607711cd339dce1de6d64425a0985cfd');
 
 -- --------------------------------------------------------
 
@@ -140,7 +143,6 @@ INSERT INTO `Personne` (`per_id`, `per_nom`, `per_prenom`, `per_mail`, `per_mdp`
 -- Structure de la table `Question`
 --
 
-DROP TABLE IF EXISTS `Question`;
 CREATE TABLE `Question` (
   `que_id` int(11) NOT NULL,
   `son_id` int(11) NOT NULL,
@@ -152,7 +154,9 @@ CREATE TABLE `Question` (
 --
 
 INSERT INTO `Question` (`que_id`, `son_id`, `que_question`) VALUES
-(1, 1, 'ON MANGE QUOI ?');
+(1, 1, '1 + 1 = ?'),
+(2, 2, 'Quelle est la couleur du cheval blanc d\'henri IV ?'),
+(3, 3, 'Combien Joey a-t-il eu à son DS de J2E ?');
 
 -- --------------------------------------------------------
 
@@ -160,7 +164,6 @@ INSERT INTO `Question` (`que_id`, `son_id`, `que_question`) VALUES
 -- Structure de la table `Reponse`
 --
 
-DROP TABLE IF EXISTS `Reponse`;
 CREATE TABLE `Reponse` (
   `rep_id` int(11) NOT NULL,
   `rep_vrai` tinyint(1) NOT NULL,
@@ -173,8 +176,13 @@ CREATE TABLE `Reponse` (
 --
 
 INSERT INTO `Reponse` (`rep_id`, `rep_vrai`, `que_id`, `rep_label`) VALUES
-(1, 1, 1, 'Tacos'),
-(2, 0, 1, 'Pizza');
+(1, 0, 1, '1'),
+(2, 1, 1, '2'),
+(3, 0, 2, 'bleu'),
+(4, 0, 2, 'rouge'),
+(5, 1, 3, 'blanc'),
+(6, 1, 3, '6.0'),
+(7, 0, 3, '18.0');
 
 -- --------------------------------------------------------
 
@@ -182,19 +190,11 @@ INSERT INTO `Reponse` (`rep_id`, `rep_vrai`, `que_id`, `rep_label`) VALUES
 -- Structure de la table `ReponseEtu`
 --
 
-DROP TABLE IF EXISTS `ReponseEtu`;
 CREATE TABLE `ReponseEtu` (
   `rpe_id` int(11) NOT NULL,
   `rep_id` int(11) NOT NULL,
   `etu_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Contenu de la table `ReponseEtu`
---
-
-INSERT INTO `ReponseEtu` (`rpe_id`, `rep_id`, `etu_id`) VALUES
-(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -202,13 +202,12 @@ INSERT INTO `ReponseEtu` (`rpe_id`, `rep_id`, `etu_id`) VALUES
 -- Structure de la table `Sondage`
 --
 
-DROP TABLE IF EXISTS `Sondage`;
 CREATE TABLE `Sondage` (
   `son_id` int(11) NOT NULL,
-  `son_refe` varchar(10) NOT NULL,
+  `son_refe` varchar(20) NOT NULL,
   `ens_id` int(11) NOT NULL,
   `cla_id` int(11) NOT NULL,
-  `cla_flag` varchar(1) NOT NULL DEFAULT 'O'
+  `cla_flag` varchar(1) NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -216,7 +215,9 @@ CREATE TABLE `Sondage` (
 --
 
 INSERT INTO `Sondage` (`son_id`, `son_refe`, `ens_id`, `cla_id`, `cla_flag`) VALUES
-(1, 'SWAG', 1, 1, 'O');
+(1, 'SONDAGE MIAW', 2, 1, 'O'),
+(2, 'SONDAGE SIMO', 2, 2, 'O'),
+(3, 'SONDAGE S4D', 3, 3, 'N');
 
 -- --------------------------------------------------------
 
@@ -224,7 +225,6 @@ INSERT INTO `Sondage` (`son_id`, `son_refe`, `ens_id`, `cla_id`, `cla_flag`) VAL
 -- Doublure de structure pour la vue `v_enseignant`
 -- (Voir ci-dessous la vue réelle)
 --
-DROP VIEW IF EXISTS `v_enseignant`;
 CREATE TABLE `v_enseignant` (
 `per_id` int(11)
 ,`per_nom` varchar(20)
@@ -240,7 +240,6 @@ CREATE TABLE `v_enseignant` (
 -- Doublure de structure pour la vue `v_etudiant`
 -- (Voir ci-dessous la vue réelle)
 --
-DROP VIEW IF EXISTS `v_etudiant`;
 CREATE TABLE `v_etudiant` (
 `per_id` int(11)
 ,`per_nom` varchar(20)
@@ -353,37 +352,37 @@ ALTER TABLE `Sondage`
 -- AUTO_INCREMENT pour la table `Classe`
 --
 ALTER TABLE `Classe`
-  MODIFY `cla_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `cla_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `Enseignant`
 --
 ALTER TABLE `Enseignant`
-  MODIFY `ens_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ens_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `Etudiant`
 --
 ALTER TABLE `Etudiant`
-  MODIFY `etu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `etu_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `Niveau`
 --
 ALTER TABLE `Niveau`
-  MODIFY `niv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `niv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT pour la table `Personne`
 --
 ALTER TABLE `Personne`
-  MODIFY `per_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `per_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT pour la table `Question`
 --
 ALTER TABLE `Question`
-  MODIFY `que_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `que_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT pour la table `Reponse`
 --
 ALTER TABLE `Reponse`
-  MODIFY `rep_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `rep_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT pour la table `ReponseEtu`
 --
@@ -393,7 +392,7 @@ ALTER TABLE `ReponseEtu`
 -- AUTO_INCREMENT pour la table `Sondage`
 --
 ALTER TABLE `Sondage`
-  MODIFY `son_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `son_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- Contraintes pour les tables exportées
 --
