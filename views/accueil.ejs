@@ -18,6 +18,9 @@
                 <th>N°</th>
                 <th>Libelle</th>
                 <th>Etat</th>
+                <% if(user.isProf){ %>
+                    <th>Ouvrir/Fermer</th>
+                <% } %>
             </tr>
             <% for(var i=0; i < Object.keys(sondages.sondages).length; i++) {%>
             <tr>
@@ -28,6 +31,17 @@
                 <% } %>
                 <% if (sondages.sondages[i].cla_flag == 'F'){ %>
                     <td><a class="ferme" href="/quiz/<%= sondages.sondages[i].son_id %>">Fermé</a></td>
+                <% } %>
+                <% if (sondages.sondages[i].cla_flag == 'N'){ %>
+                    <td><a class="nouveau" href="/quiz/<%= sondages.sondages[i].son_id %>">Nouveau</a></td>
+                <% } %>
+                <% if(user.isProf){ %>
+                    <% if (sondages.sondages[i].cla_flag == 'F' || sondages.sondages[i].cla_flag == 'N'){ %>
+                        <td><a class="ouvert" href="/etat/<%= sondages.sondages[i].son_id %>/O">Ouvrir</a></td>
+                    <% } %>
+                    <% if (sondages.sondages[i].cla_flag == 'O'){ %>
+                        <td><a class="ferme" href="/etat/<%= sondages.sondages[i].son_id %>/F">Fermer</a></td>
+                    <% } %>
                 <% } %>
             </tr>
             <% } %>
